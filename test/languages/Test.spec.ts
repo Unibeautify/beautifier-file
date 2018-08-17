@@ -9,6 +9,7 @@ const texts = {
   lfWithNewline: `console.log("line 1");\nconsole.log("line 2");\n`,
   lfWithoutNewline: `console.log("line 1");\nconsole.log("line 2");`,
   crlfWithoutNewline: `console.log("line 1");\r\nconsole.log("line 2");`,
+  crWithoutNewline: `console.log("line 1");\rconsole.log("line 2");`,
 };
 
 const cases: Case[] = [
@@ -224,7 +225,14 @@ const cases: Case[] = [
       end_of_line: "LF",
     },
   },
-  /*
+  {
+    text: "crlfWithoutNewline",
+    expected: `console.log("line 1");\nconsole.log("line 2");\n`,
+    options: {
+      end_with_newline: true,
+      end_of_line: "LF",
+    },
+  },
   {
     text: "crlfWithoutNewline",
     expected: texts.crlfWithoutNewline,
@@ -241,16 +249,6 @@ const cases: Case[] = [
       end_of_line: "CRLF",
     },
   },
-  */
-  {
-    text: "crlfWithoutNewline",
-    expected: `console.log("line 1");\nconsole.log("line 2");\n`,
-    options: {
-      end_with_newline: true,
-      end_of_line: "LF",
-    },
-  },
-  /*
   {
     text: "crlfWithoutNewline",
     expected: texts.crlfWithoutNewline,
@@ -262,6 +260,20 @@ const cases: Case[] = [
   {
     text: "crlfWithoutNewline",
     expected: `console.log("line 1");\r\nconsole.log("line 2");\r\n`,
+    options: {
+      end_with_newline: true,
+      end_of_line: undefined,
+    },
+  },
+  /*
+  {
+    text: "crWithoutNewline",
+    expected: texts.crWithoutNewline,
+    options: {},
+  },
+  {
+    text: "crWithoutNewline",
+    expected: `console.log("line 1");\rconsole.log("line 2");\r`,
     options: {
       end_with_newline: true,
       end_of_line: undefined,

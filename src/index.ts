@@ -25,7 +25,7 @@ export const beautifier: Beautifier = {
       if (!eolChar) {
         return Promise.resolve(text);
       }
-      const newText = resetAllLineEndings(text, eolChar);
+      const newText = normalizeLineEndings(text, eolChar);
       const endWithNewline: boolean | undefined = options.end_with_newline;
       const doesEndWithNewline: boolean = newText.endsWith(eolChar);
       if (doesEndWithNewline !== endWithNewline) {
@@ -50,6 +50,10 @@ function detectEol(text: string, endOfLine: EOL): LineEnding | undefined {
 
 export type EOL = "CRLF" | "LF" | "System Default" | undefined;
 export type LineEnding = "\r\n" | "\r" | "\n";
+
+function normalizeLineEndings(text: string, lineEnding: LineEnding): string {
+  return changeLineEnding(resetAllLineEndings(text, "\n"), "\n", lineEnding);
+}
 
 function resetAllLineEndings(text: string, lineEnding: LineEnding): string {
   return allLineEndings.reduce(
