@@ -23,12 +23,6 @@ export const beautifier: Beautifier = {
       }
       const eolChar = detectEol(text, options.end_of_line);
       if (!eolChar) {
-        if (options.end_with_newline === false) {
-          const eofLineEnding = allLineEndings.find(eol => text.endsWith(eol));
-          if (eofLineEnding) {
-            return removeEndOfFileNewline(text, eofLineEnding);
-          }
-        }
         return Promise.resolve(text);
       }
       const newText = resetAllLineEndings(text, eolChar);
@@ -73,9 +67,9 @@ function changeLineEnding(
 }
 
 function detectLineEnding(text: string): LineEnding | undefined {
-  const cr = text.split("\r").length;
-  const lf = text.split("\n").length;
-  const crlf = text.split("\r\n").length;
+  const cr = text.split("\r").length - 1;
+  const lf = text.split("\n").length - 1;
+  const crlf = text.split("\r\n").length - 1;
   if (cr + lf === 0) {
     return;
   }
