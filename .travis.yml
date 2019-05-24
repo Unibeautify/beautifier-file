@@ -3,9 +3,8 @@ env:
     - CC_TEST_REPORTER_ID=FIX_ME
 language: node_js
 node_js:
-  - "8"
-  - "6"
-  - "10"
+  - "node"
+  - "lts/*"
 os:
   - linux
   # - osx
