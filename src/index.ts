@@ -1,7 +1,7 @@
 import { Beautifier, BeautifierBeautifyData } from "unibeautify";
 import * as readPkgUp from "read-pkg-up";
 
-const { pkg } = readPkgUp.sync({ cwd: __dirname });
+const pkg = readPkgUp.sync({ cwd: __dirname })!.package;
 
 import { options } from "./options";
 
